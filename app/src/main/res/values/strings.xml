@@ -1,0 +1,86 @@
+<resources>
+    <string name="app_name">License LK</string>
+
+    <string name="app_logo">License LK</string>
+    <string name="top_image">top_image</string>
+
+    <string name="icon_back">back</string>
+
+    <string name="tab_tip">Tips</string>
+    <string name="tab_theory">Theories</string>
+    <string name="tab_quiz">Quiz</string>
+    <string name="tab_motivation">For You</string>
+
+    <string name="tip1">Tip 1</string>
+    <string name="tip1_subject">Adjust Your Seat and Mirrors</string>
+    <string name="tip1_body">Before starting the engine, ensure your seat and mirrors are properly adjusted. A comfortable and well-positioned seat, along with correctly adjusted mirrors, will enhance your visibility and control</string>
+
+    <string name="tip2">Tip 2</string>
+    <string name="tip2_subject">Buckle Up</string>
+    <string name="tip2_body">Always wear your seatbelt and ensure that all passengers do the same. Seatbelts are crucial for your safety and the safety of others in the vehicle.</string>
+
+    <string name="tip3">Tip 3</string>
+    <string name="tip3_subject">Understand Dashboard Controls</string>
+    <string name="tip3_body">Familiarize yourself with the basic dashboard controls such as indicators, headlights, windshield wipers, and hazard lights. Knowing how to operate these controls will help you navigate different driving conditions.</string>
+
+    <string name="tip4">Tip 4</string>
+    <string name="tip4_subject">Adjust Your Seat and Mirrors</string>
+    <string name="tip4_body">Before starting the engine, ensure your seat and mirrors are properly adjusted. A comfortable and well-positioned seat, along with correctly adjusted mirrors, will enhance your visibility and control</string>
+
+    <string name="tip5">Tip 5</string>
+    <string name="tip5_subject">Adjust Your Seat and Mirrors</string>
+    <string name="tip5_body">Before starting the engine, ensure your seat and mirrors are properly adjusted. A comfortable and well-positioned seat, along with correctly adjusted mirrors, will enhance your visibility and control</string>
+
+    <string name="tip6">Tip 6</string>
+    <string name="tip6_subject">Adjust Your Seat and Mirrors</string>
+    <string name="tip6_body">Before starting the engine, ensure your seat and mirrors are properly adjusted. A comfortable and well-positioned seat, along with correctly adjusted mirrors, will enhance your visibility and control</string>
+
+    <string name="tip7">Tip 7</string>
+    <string name="tip7_subject">Adjust Your Seat and Mirrors</string>
+    <string name="tip7_body">Before starting the engine, ensure your seat and mirrors are properly adjusted. A comfortable and well-positioned seat, along with correctly adjusted mirrors, will enhance your visibility and control</string>
+
+    <string name="tip8">Tip 8</string>
+    <string name="tip8_subject">Adjust Your Seat and Mirrors</string>
+    <string name="tip8_body">Before starting the engine, ensure your seat and mirrors are properly adjusted. A comfortable and well-positioned seat, along with correctly adjusted mirrors, will enhance your visibility and control</string>
+
+    <string name="tip9">Tip 9</string>
+    <string name="tip9_subject">Adjust Your Seat and Mirrors</string>
+    <string name="tip9_body">Before starting the engine, ensure your seat and mirrors are properly adjusted. A comfortable and well-positioned seat, along with correctly adjusted mirrors, will enhance your visibility and control</string>
+
+    <string name="tip10">Tip 10</string>
+    <string name="tip10_subject">Adjust Your Seat and Mirrors</string>
+    <string name="tip10_body">Before starting the engine, ensure your seat and mirrors are properly adjusted. A comfortable and well-positioned seat, along with correctly adjusted mirrors, will enhance your visibility and control</string>
+
+    <string name="cat1">Warning Signs</string>
+    <string name="cat2">Danger Signs</string>
+    <string name="cat3">Other Signs</string>
+
+    <string name="quiz_cat1">Paper 1</string>
+    <string name="quiz_cat2">Paper 2</string>
+    <string name="quiz_cat3">Paper 3</string>
+
+    <string name="paper1_q1">What is this?</string>
+
+
+    <string name="t1">Turn Left</string>
+    <string name="t2">Turn Right</string>
+    <string name="t3">Turn Left</string>
+    <string name="t4">Turn Right</string>
+    <string name="t5">Turn Left</string>
+    <string name="t6">Turn Right</string>
+    <string name="t7">Turn Left</string>
+    <string name="t8">Turn Right</string>
+    <string name="t9">Turn Left</string>
+    <string name="t10">Turn Right</string>
+
+    <string name="d1">No entry</string>
+
+    <string name="o1">School Ahead</string>
+
+
+    <string name="Score">Score : %d</string>
+    <string name="Count"> %d/10</string>
+    <string name="title_activity_quiz">QuizActivity</string>
+
+
+</resources>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="logo_size">64dp</dimen>
+    <dimen name="logo_padding_start">16dp</dimen>
+    <dimen name="top_image_size">48dp</dimen>
+    <dimen name="top_image_padding_end">16dp</dimen>
+
+    <dimen name="lazy_column_horizontal_padding">16dp</dimen>
+    <dimen name="column_padding_horizontal">16dp</dimen>
+
+    <dimen name="image_size">300dp</dimen>
+    <dimen name="image_size_medium">250dp</dimen>
+    <dimen name="image_size_small">120dp</dimen>
+
+    <dimen name="bottom_bar_padding_bottom">76dp</dimen>
+
+    <dimen name="card_header_image_size">40dp</dimen>
+    <dimen name="card_header_horizontal_padding">8dp</dimen>
+    <dimen name="card_inner_padding">20dp</dimen>
+
+    <dimen name="icon_padding">24dp</dimen>
+    <dimen name="lazy_column_top">24dp</dimen>
+    <dimen name="top_bar_padding_bottom">24dp</dimen>
+    <dimen name="details_card_horizontal_padding">24dp</dimen>
+
+    <dimen name="card_list_vertical_padding">2dp</dimen>
+
+    <dimen name="top_bar_padding_vertical">8dp</dimen>
+
+    <dimen name="subject_padding_top">12dp</dimen>
+
+    <dimen name="image_padding_top">10dp</dimen>
+    <dimen name="image_padding_bottom">10dp</dimen>
+
+    <dimen name="subject_padding_bottom">8dp</dimen>
+</resources>
