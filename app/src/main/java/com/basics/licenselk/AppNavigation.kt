@@ -49,8 +49,9 @@ fun AppNavigationControl(
         composable("Quiz"){
             QuizCategoryScreen(
                 context = context,
+                viewModel = viewModel,
                 onclick = {
-                    viewModel.updateQuizScreenState(it)}
+                    viewModel.updateQuizScreenState()}
             )  //Pass the actual later
         }
         composable("For You"){

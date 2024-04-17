@@ -7,8 +7,8 @@ import androidx.annotation.StringRes
 
 data class Quiz(
     @DrawableRes val image: Int,
-    @StringRes val paper: Int
-) : Parcelable {
+    @StringRes val paper: Int)
+ : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readInt(),
         parcel.readInt()

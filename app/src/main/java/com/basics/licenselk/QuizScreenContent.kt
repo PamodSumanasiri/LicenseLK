@@ -38,8 +38,9 @@ import com.basics.licenselk.data.local.TheoryList
 @Composable
 fun QuizCategoryScreen(
     modifier: Modifier= Modifier,
-    onclick: (Quiz) -> Unit,
-    context: Context
+    onclick: () -> Unit,
+    context: Context,
+    viewModel : LicenseLKViewModel
 ) {
     LazyColumn(
         modifier = modifier,
@@ -57,7 +58,8 @@ fun QuizCategoryScreen(
             QuizCategoryCard(
                 QuizCategory = it,
                 onclick = onclick,
-                context = context
+                context = context,
+                viewModel = viewModel
             )
         }
     }
@@ -69,8 +71,9 @@ fun QuizCategoryScreen(
 fun QuizCategoryCard(
     QuizCategory: Quiz,
     modifier: Modifier = Modifier,
-    onclick : (Quiz) -> Unit,
-    context: Context
+    onclick : () -> Unit,
+    context: Context,
+    viewModel : LicenseLKViewModel
 ) {
     Column(modifier = Modifier
         .fillMaxWidth()
@@ -86,7 +89,8 @@ fun QuizCategoryCard(
             modifier = modifier,
             colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.secondaryContainer),
             onClick = {
-                onclick(QuizCategory)
+                onclick()  //maybe didn't catch these data too.
+//                viewModel.getRandomSet() //didn't catch in new activity
                 val intent = Intent(context,QuizActivity::class.java).apply {
                     putExtra("quizCategory",QuizCategory)
                 }

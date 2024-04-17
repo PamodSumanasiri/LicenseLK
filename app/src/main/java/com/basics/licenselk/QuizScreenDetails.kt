@@ -1,6 +1,5 @@
 package com.basics.licenselk
 
-import android.content.Context
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -16,7 +15,6 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.Button
-import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -25,7 +23,10 @@ import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.ShapeDefaults
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -40,50 +41,119 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.basics.licenselk.data.Quiz
+import androidx.compose.ui.unit.sp
 import com.basics.licenselk.data.QuizItems
-import com.basics.licenselk.data.local.QuizLists
+import kotlinx.coroutines.delay
 
 
 @Composable
 fun QuizQuestionScreen(
     modifier: Modifier = Modifier,
-    onSelectionChanged: (String) -> Unit,
+//    onSelectionChanged: (String) -> Unit,
     onSubmitButtonClicked: () -> Unit,
     onBackButtonClicked : () -> Unit,
     currentScore : Int,
     currentCount : Int,
-    licenseLKUiState: LicenseLKUiState,
-    quizItems: QuizItems  //Point is in here. when user select Paper 1 the UI should use the list1.
-    // You can use when statements but the issue is we need a QuizItems not a List. can update the
-    // uistate to currentSelectedQuizItem and then use
+    viewModel : LicenseLKViewModel,
+    quizItems: QuizItems,
+    navigateBack: ()-> Unit
 ) {
-//    val quizItems = when(licenseLKUiState.currentSelectedQuizCategory.paper){
-//        R.string.quiz_cat1 -> QuizLists.paper1
-//        R.string.quiz_cat2 -> QuizLists.paper2
-//        else -> QuizLists.paper3
-//
-//    }
+    val uiState by viewModel.uiState.collectAsState()
+
     Column(
         modifier = Modifier
-        .fillMaxWidth()
-        .padding(dimensionResource(id = R.dimen.column_padding_horizontal))
+            .fillMaxWidth()
+            .padding(dimensionResource(id = R.dimen.column_padding_horizontal))
     ) {
         QuizScreenTopBar(
-            Question = quizItems.Question,
+            currentSelectedQuiz = quizItems,
             onBackButtonClicked = onBackButtonClicked
         )
         ImageAndScoreCount(
-            Image = quizItems.Image,
+            image = quizItems.Image,
             currentScore = currentScore,
             currentCount = currentCount
         )
         OptionListAndSubmitButton(
             quizItems = quizItems,
-            onSelectionChanged = onSelectionChanged,
+            viewModel = viewModel,
             onSubmitButtonClicked = onSubmitButtonClicked
         )
+        if (viewModel.correctAnswer == false){
+            LaunchedEffect(uiState){
+                delay(2000)
+            }
+            Box(modifier = Modifier
+                .fillMaxSize()
+                .background(MaterialTheme.colorScheme.background)) {
+                Text(
+                    text = "Correct Answer is ${uiState.currentSelectedQuizItems.CorrectOption}",
+                    fontSize = 16.sp,
+                    modifier = Modifier
+                        .align(Alignment.Center)
+                        .padding(16.dp),
+                    color = MaterialTheme.colorScheme.onPrimary
+                )
+            }
+        }
+        if (uiState.isGameOver){
+            AlertDialog(score = currentScore, playAgain = { viewModel.onPlayAgainClicked() }, navigateBack = navigateBack)
+        }
+        if (uiState.leaveAlert){
+            AlertDialog2(dismiss = { viewModel.onQuizDismissButtonClicked() }, navigateBack =  navigateBack )
+        }
+
+
     }
+}
+
+@Composable
+private fun AlertDialog(
+    score: Int,
+    playAgain: ()-> Unit,
+    navigateBack: ()-> Unit,
+    modifier: Modifier = Modifier
+){
+
+    androidx.compose.material3.AlertDialog(
+        onDismissRequest = { /*TODO*/ },
+        title = { Text(text = stringResource(id = R.string.congratulation))},
+        text = { Text(text = stringResource(id = R.string.your_score,score))},
+        modifier = modifier,
+        dismissButton = { TextButton(onClick = { navigateBack()  }) {
+            Text(text = stringResource(id = R.string.back_to_menu))
+        }
+        },
+        confirmButton = { TextButton(onClick = playAgain) {
+            Text(text = stringResource(id = R.string.play_again))
+        }
+        }
+
+    )
+}
+
+@Composable
+private fun AlertDialog2(
+    dismiss: ()-> Unit,
+    navigateBack: ()-> Unit,
+    modifier: Modifier = Modifier
+){
+
+    androidx.compose.material3.AlertDialog(
+        onDismissRequest = dismiss ,
+        title = { Text(text = stringResource(id = R.string.warning))},
+        text = { Text(text = stringResource(id = R.string.leave_quiz))},
+        modifier = modifier,
+        dismissButton = { TextButton(onClick =  dismiss ) {
+            Text(text = stringResource(id = R.string.no_option))
+        }
+        },
+        confirmButton = { TextButton(onClick = navigateBack) {
+            Text(text = stringResource(id = R.string.yes_option))
+        }
+        }
+
+    )
 }
 
 
@@ -92,8 +162,9 @@ fun QuizQuestionScreen(
 fun OptionListAndSubmitButton(
     modifier: Modifier = Modifier,
     quizItems: QuizItems,
-    onSelectionChanged : (String) -> Unit,
-    onSubmitButtonClicked : () -> Unit
+//    onSelectionChanged : (String) -> Unit,
+    onSubmitButtonClicked : () -> Unit,
+    viewModel: LicenseLKViewModel
 ) {
     var selectedValue by rememberSaveable { mutableStateOf("") }
 
@@ -115,7 +186,7 @@ fun OptionListAndSubmitButton(
                                 selected = it == selectedValue,
                                 onClick = {
                                     selectedValue = it
-                                    onSelectionChanged(it)
+                                    viewModel.onRadioButtonClicked(it)
                                 }
                             ), verticalAlignment = Alignment.CenterVertically
 
@@ -124,7 +195,7 @@ fun OptionListAndSubmitButton(
                             selected = it == selectedValue,
                             onClick = {
                                 selectedValue = it
-                                onSelectionChanged(it)
+                                viewModel.onRadioButtonClicked(it)
                             }
                         )
                         Text(
@@ -160,7 +231,7 @@ fun OptionListAndSubmitButton(
 @Composable
 fun ImageAndScoreCount(
     modifier: Modifier = Modifier,
-    Image: Int,
+    image : Int,  //here
     currentScore : Int,
     currentCount : Int
 ) {
@@ -173,7 +244,7 @@ fun ImageAndScoreCount(
             .size(dimensionResource(id = R.dimen.image_size_medium))
         ) {
             androidx.compose.foundation.Image(
-                painter = painterResource(id = Image),
+                painter = painterResource(id = image),
                 contentDescription = null,
                 contentScale = ContentScale.Crop,
                 modifier = Modifier.fillMaxSize()
@@ -213,8 +284,8 @@ fun ImageAndScoreCount(
 @Composable
 fun QuizScreenTopBar(
     modifier: Modifier = Modifier,
-    Question: Int,
-    onBackButtonClicked : () -> Unit,
+    currentSelectedQuiz : QuizItems,
+    onBackButtonClicked: () -> Unit,
 ) {
     Row(
         modifier = modifier,
@@ -236,7 +307,7 @@ fun QuizScreenTopBar(
             )
         }
         Text(
-            text = stringResource(id = Question),
+            text = currentSelectedQuiz.Question.toString(),
             style = MaterialTheme.typography.titleMedium,
             color = MaterialTheme.colorScheme.onSurfaceVariant
         )
