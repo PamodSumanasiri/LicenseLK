@@ -76,9 +76,13 @@ class LicenseLKViewModel : ViewModel() {
     }
 
      fun onNextButtonClicked(){
-        val isCorrect = userSelectedOption == currentSet?.CorrectOption
+        val isCorrect = userSelectedOption == currentSet?.CorrectOption?.trim()
+         Log.d("AnswerCheck", "User selected option: $userSelectedOption")
+         Log.d("AnswerCheck", "Correct option: ${currentSet?.CorrectOption}")
+         Log.d("AnswerCheck", "Is correct: $isCorrect")
         isAnswerCorrect = isCorrect
         if (isCorrect) {
+            Log.d("AnswerCheck", "Selected option is correct")
             if (usedSets.size<10){
                 quizList?.let { getRandomSet(it) }
 
@@ -95,6 +99,7 @@ class LicenseLKViewModel : ViewModel() {
                 _uiState.update { it.copy(isQuizOver = true) }
             }
         }else{
+            Log.d("AnswerCheck", "Selected option is incorrect")
             updateUiStateWithCurrentSet(_uiState.value.score)
             quizList?.let { delayAndMoveToNextQuestion(it) }
             if (!uiState.value.isQuizOver){
@@ -189,9 +194,10 @@ class LicenseLKViewModel : ViewModel() {
 //    }
 
     fun onRadioButtonClicked(option : String){
+        userSelectedOption = option
         _uiState.update {
             it.copy(
-                currentSelectedOption = option
+                currentSelectedOption = option,
             )
         }
     }

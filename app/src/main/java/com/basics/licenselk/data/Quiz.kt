@@ -35,7 +35,7 @@ data class Quiz(
 }
 
 data class QuizItems(
-    @StringRes val Question : Int,
+    @StringRes val Question : String,
     @DrawableRes val Image : Int,
     val OptionList: List<String>,
     val CorrectOption : String

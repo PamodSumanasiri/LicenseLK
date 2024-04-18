@@ -1,5 +1,6 @@
 package com.basics.licenselk
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import androidx.compose.foundation.Image
@@ -93,8 +94,10 @@ fun QuizCategoryCard(
 //                viewModel.getRandomSet() //didn't catch in new activity
                 val intent = Intent(context,QuizActivity::class.java).apply {
                     putExtra("quizCategory",QuizCategory)
+                    //flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
                 }
                 context.startActivity(intent)  //new
+                //(activity as Activity).finish()
             }
         ) {
             Column(verticalArrangement = Arrangement.Center) {
